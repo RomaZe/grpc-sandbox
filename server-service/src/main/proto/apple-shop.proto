@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+
+package Apple;
+
+import "google/protobuf/empty.proto";
+
+service AppleShopService {
+  rpc checkApple(AppleCountRequest) returns (AppleCountResponse);
+  rpc buyApple(RequestApple) returns (ResponseApple);
+  rpc addApple(AppleAddCountRequest) returns (google.protobuf.Empty);
+}
+
+message RequestApple {
+  int32 weight = 1;
+  ColorType color = 2;
+}
+
+enum ColorType {
+  red = 0;
+  green = 1;
+  blue = 2;
+}
+
+message ResponseApple {
+  int32 weight = 1;
+  ColorType color = 2;
+  repeated string shop = 3;
+}
+
+message AppleCountRequest {
+  string shopName = 3;
+}
+
+message AppleCountResponse {
+  int32 count = 1;
+}
+
+message AppleAddCountRequest {
+  int32 amount = 1;
+}
